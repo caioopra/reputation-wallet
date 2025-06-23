@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 const initialMockReviews = [
     {
         id: 1,
-        employerName: "Innovate Corp",
+        employerName: "HashMasters",
         jobTitle: "UX/UI Design for Mobile App",
         dateIssued: "May 20, 2024",
         rating: 5,

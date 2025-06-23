@@ -143,7 +143,7 @@ const EmployerView = () => {
         window.dispatchEvent(
             new CustomEvent("newReview", {
                 detail: {
-                    employerName: "Innovate Corp",
+                    employerName: "HashMasters",
                     jobTitle: selectedCollaboration.jobTitle,
                     rating: rating,
                     review: review,
@@ -194,10 +194,10 @@ const EmployerView = () => {
                 <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
                         <div>
-                            <CardTitle className="text-lg sm:text-xl font-bold text-reputation-gray-900">
+                            <CardTitle className="text-lg sm:text-xl font-bold text-reputation-white-900">
                                 My Recent Collaborations
                             </CardTitle>
-                            <p className="text-reputation-gray-600">
+                            <p className="text-reputation-white-600">
                                 Manage and review your recent project
                                 collaborations
                             </p>
@@ -212,23 +212,31 @@ const EmployerView = () => {
                                     Scan QR Code
                                 </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-md">
+                            <DialogContent className="max-w-md bg-reputation-gray-800 text-reputation-white [&>button]:hidden">
                                 <DialogHeader>
-                                    <DialogTitle>
+                                    <DialogTitle className="text-white">
                                         Scan Freelancer QR Code
                                     </DialogTitle>
+                                    <Button
+                                        onClick={() => setIsQrDialogOpen(false)}
+                                        className="absolute top-2 right-2 text-white hover:text-gray-300 transition-colors duration-200"
+                                    >
+                                        ✕
+                                    </Button>
                                 </DialogHeader>
                                 <div className="space-y-4">
-                                    <div className="flex items-center justify-center p-8 bg-reputation-gray-50 rounded-lg">
-                                        <QrCode className="w-24 h-24 text-reputation-gray-400" />
+                                    <div className="flex items-center justify-center p-8 bg-reputation-white rounded-lg bg-reputation-gray-200">
+                                        <QrCode className="w-24 h-24 text-reputation-grey-400" />
                                     </div>
-                                    <p className="text-sm text-reputation-gray-600 text-center">
-                                        In a real implementation, this would
-                                        activate your camera to scan a
-                                        freelancer's QR code.
-                                    </p>
+                                    <div className="flex items-center justify-center">
+                                        <i className="text-sm text-white text-center">
+                                            In a real implementation, this would
+                                            activate your camera to scan a
+                                            freelancer's QR code.
+                                        </i>
+                                    </div>
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-reputation-gray-700">
+                                        <label className="block text-sm font-medium text-white">
                                             Job Title for this Review
                                         </label>
                                         <Input
@@ -237,6 +245,7 @@ const EmployerView = () => {
                                             onChange={(e) =>
                                                 setQrJobTitle(e.target.value)
                                             }
+                                            className="text-white"
                                         />
                                     </div>
                                     <div className="flex space-x-3">
@@ -245,14 +254,14 @@ const EmployerView = () => {
                                             onClick={() =>
                                                 setIsQrDialogOpen(false)
                                             }
-                                            className="flex-1"
+                                            className="flex-1 text-white border-white hover:bg-reputation-gray-700 transition-colors duration-200"
                                         >
                                             Cancel
                                         </Button>
                                         <Button
                                             onClick={handleQrScan}
                                             disabled={!qrJobTitle.trim()}
-                                            className="flex-1 bg-reputation-blue-600 hover:bg-reputation-blue-700"
+                                            className="flex-1 bg-reputation-blue-600 hover:bg-reputation-blue-700 text-white"
                                         >
                                             Identify Freelancer
                                         </Button>
@@ -267,14 +276,14 @@ const EmployerView = () => {
                         {collaborations.map((collaboration) => (
                             <Card
                                 key={collaboration.id}
-                                className="border-reputation-gray-200 hover:shadow-md transition-shadow duration-200"
+                                className="border-reputation-white-200 hover:shadow-md transition-shadow duration-200"
                             >
                                 <CardContent className="p-4 sm:p-6">
                                     <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-4 lg:space-y-0">
                                         <div className="space-y-3 flex-1">
                                             <div className="flex items-center space-x-2">
                                                 <UserIcon />
-                                                <span className="font-semibold text-reputation-gray-900">
+                                                <span className="font-semibold text-reputation-white-900">
                                                     {
                                                         collaboration.freelancerName
                                                     }
@@ -282,7 +291,7 @@ const EmployerView = () => {
                                             </div>
 
                                             <div>
-                                                <h3 className="font-medium text-reputation-gray-900">
+                                                <h3 className="font-medium text-reputation-white-900">
                                                     {collaboration.jobTitle}
                                                 </h3>
                                             </div>
@@ -312,9 +321,9 @@ const EmployerView = () => {
                                                             Review Pending
                                                         </Button>
                                                     </DialogTrigger>
-                                                    <DialogContent className="max-w-md sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+                                                    <DialogContent className="max-w-md sm:max-w-2xl max-h-[90vh] overflow-y-auto bg-reputation-gray-800 text-reputation-white">
                                                         <DialogHeader>
-                                                            <DialogTitle className="text-lg sm:text-xl">
+                                                            <DialogTitle className="text-lg sm:text-xl font-bold text-reputation-gray-100">
                                                                 Issue Verifiable
                                                                 Review for{" "}
                                                                 {
@@ -325,7 +334,7 @@ const EmployerView = () => {
                                                         {selectedCollaboration && (
                                                             <div className="space-y-6">
                                                                 <div>
-                                                                    <h3 className="font-semibold text-reputation-gray-900 mb-2">
+                                                                    <h3 className="font-semibold text-reputation-gray-200 mb-2">
                                                                         Job:{" "}
                                                                         {
                                                                             selectedCollaboration.jobTitle
@@ -334,7 +343,7 @@ const EmployerView = () => {
                                                                 </div>
 
                                                                 <div>
-                                                                    <label className="block text-sm font-medium text-reputation-gray-700 mb-2">
+                                                                    <label className="block text-sm font-medium text-reputation-gray-200 mb-2">
                                                                         Rating *
                                                                     </label>
                                                                     <div className="flex space-x-1">
@@ -346,7 +355,7 @@ const EmployerView = () => {
                                                                 </div>
 
                                                                 <div>
-                                                                    <label className="block text-sm font-medium text-reputation-gray-700 mb-2">
+                                                                    <label className="block text-sm font-medium text-reputation-gray-200 mb-2">
                                                                         Public
                                                                         Comment
                                                                     </label>
@@ -364,12 +373,12 @@ const EmployerView = () => {
                                                                                     .value
                                                                             )
                                                                         }
-                                                                        className="min-h-[100px]"
+                                                                        className="min-h-[100px] bg-transparent text-white border border-white"
                                                                     />
                                                                 </div>
 
                                                                 <div>
-                                                                    <label className="block text-sm font-medium text-reputation-gray-700 mb-3">
+                                                                    <label className="block text-sm font-medium text-reputation-gray-100 mb-3">
                                                                         Skills
                                                                         Verified
                                                                         (Optional)
@@ -394,8 +403,8 @@ const EmployerView = () => {
                                                                                         selectedSkills.includes(
                                                                                             skill
                                                                                         )
-                                                                                            ? "bg-reputation-blue-600 hover:bg-reputation-blue-700"
-                                                                                            : "hover:bg-reputation-gray-100"
+                                                                                            ? "bg-blue-500 text-white hover:bg-blue-600"
+                                                                                            : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                                                                                     }`}
                                                                                     onClick={() =>
                                                                                         handleSkillToggle(
@@ -410,7 +419,7 @@ const EmployerView = () => {
                                                                             )
                                                                         )}
                                                                     </div>
-                                                                    <p className="text-xs text-reputation-gray-500 mt-2">
+                                                                    <p className="text-xs text-gray-300 mt-2">
                                                                         Click to
                                                                         select
                                                                         skills
@@ -429,7 +438,7 @@ const EmployerView = () => {
                                                                                 false
                                                                             )
                                                                         }
-                                                                        className="transition-colors duration-200"
+                                                                        className="transition-colors duration-200 text-gray-100 border-gray-400 hover:bg-gray-200 hover:text-reputation-gray-900"
                                                                     >
                                                                         Cancel
                                                                     </Button>
@@ -441,7 +450,7 @@ const EmployerView = () => {
                                                                             rating ===
                                                                             0
                                                                         }
-                                                                        className="bg-reputation-blue-600 hover:bg-reputation-blue-700 transition-colors duration-200"
+                                                                        className="bg-reputation-blue-500 hover:bg-reputation-blue-600 transition-colors duration-200"
                                                                     >
                                                                         Issue
                                                                         Verifiable
