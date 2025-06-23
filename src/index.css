@@ -4,85 +4,110 @@
 
 @import '@fontsource/inter';
 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+
 @layer base {
   :root {
-    --background: 249 250 251;
-    --foreground: 17 24 39;
+    --background: 15 23 42;
+    --foreground: 248 250 252;
 
-    --card: 255 255 255;
-    --card-foreground: 17 24 39;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
 
-    --popover: 255 255 255;
-    --popover-foreground: 17 24 39;
+    --popover: 30 41 59;
+    --popover-foreground: 248 250 252;
 
-    --primary: 2 132 199;
-    --primary-foreground: 255 255 255;
+    --primary: 59 130 246;
+    --primary-foreground: 248 250 252;
 
-    --secondary: 243 244 246;
-    --secondary-foreground: 55 65 81;
+    --secondary: 51 65 85;
+    --secondary-foreground: 203 213 225;
 
-    --muted: 243 244 246;
-    --muted-foreground: 107 114 128;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
 
-    --accent: 224 242 254;
-    --accent-foreground: 3 105 161;
+    --accent: 37 99 235;
+    --accent-foreground: 219 234 254;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 248 250 252;
 
-    --border: 229 231 235;
-    --input: 229 231 235;
-    --ring: 2 132 199;
+    --border: 71 85 105;
+    --input: 71 85 105;
+    --ring: 59 130 246;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 255 255 255;
-    --sidebar-foreground: 55 65 81;
-    --sidebar-primary: 2 132 199;
-    --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 243 244 246;
-    --sidebar-accent-foreground: 55 65 81;
-    --sidebar-border: 229 231 235;
-    --sidebar-ring: 2 132 199;
+    --sidebar-background: 30 41 59;
+    --sidebar-foreground: 203 213 225;
+    --sidebar-primary: 59 130 246;
+    --sidebar-primary-foreground: 248 250 252;
+    --sidebar-accent: 51 65 85;
+    --sidebar-accent-foreground: 203 213 225;
+    --sidebar-border: 71 85 105;
+    --sidebar-ring: 59 130 246;
+
+    /* Custom dark theme colors - only greys and blues */
+    --reputation-blue-50: 239 246 255;
+    --reputation-blue-100: 219 234 254;
+    --reputation-blue-200: 191 219 254;
+    --reputation-blue-300: 147 197 253;
+    --reputation-blue-400: 96 165 250;
+    --reputation-blue-500: 59 130 246;
+    --reputation-blue-600: 37 99 235;
+    --reputation-blue-700: 29 78 216;
+    --reputation-blue-800: 30 64 175;
+    --reputation-blue-900: 30 58 138;
+
+    --reputation-gray-50: 248 250 252;
+    --reputation-gray-100: 241 245 249;
+    --reputation-gray-200: 226 232 240;
+    --reputation-gray-300: 203 213 225;
+    --reputation-gray-400: 148 163 184;
+    --reputation-gray-500: 100 116 139;
+    --reputation-gray-600: 71 85 105;
+    --reputation-gray-700: 51 65 85;
+    --reputation-gray-800: 30 41 59;
+    --reputation-gray-900: 15 23 42;
   }
 
   .dark {
-    --background: 17 24 39;
-    --foreground: 249 250 251;
+    --background: 15 23 42;
+    --foreground: 248 250 252;
 
-    --card: 31 41 55;
-    --card-foreground: 249 250 251;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
 
-    --popover: 31 41 55;
-    --popover-foreground: 249 250 251;
+    --popover: 30 41 59;
+    --popover-foreground: 248 250 252;
 
-    --primary: 56 189 248;
-    --primary-foreground: 17 24 39;
+    --primary: 59 130 246;
+    --primary-foreground: 248 250 252;
 
-    --secondary: 55 65 81;
-    --secondary-foreground: 249 250 251;
+    --secondary: 51 65 85;
+    --secondary-foreground: 203 213 225;
 
-    --muted: 55 65 81;
-    --muted-foreground: 156 163 175;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
 
-    --accent: 55 65 81;
-    --accent-foreground: 249 250 251;
+    --accent: 37 99 235;
+    --accent-foreground: 219 234 254;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 249 250 251;
+    --destructive-foreground: 248 250 252;
 
-    --border: 75 85 99;
-    --input: 75 85 99;
-    --ring: 56 189 248;
+    --border: 71 85 105;
+    --input: 71 85 105;
+    --ring: 59 130 246;
 
-    --sidebar-background: 31 41 55;
-    --sidebar-foreground: 249 250 251;
-    --sidebar-primary: 56 189 248;
-    --sidebar-primary-foreground: 17 24 39;
-    --sidebar-accent: 55 65 81;
-    --sidebar-accent-foreground: 249 250 251;
-    --sidebar-border: 75 85 99;
-    --sidebar-ring: 56 189 248;
+    --sidebar-background: 30 41 59;
+    --sidebar-foreground: 203 213 225;
+    --sidebar-primary: 59 130 246;
+    --sidebar-primary-foreground: 248 250 252;
+    --sidebar-accent: 51 65 85;
+    --sidebar-accent-foreground: 203 213 225;
+    --sidebar-border: 71 85 105;
+    --sidebar-ring: 59 130 246;
   }
 }
 
@@ -93,5 +118,81 @@
 
   body {
     @apply bg-background text-foreground font-inter;
+  }
+}
+
+/* Custom animations */
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.5s ease-out;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .hover-lift {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
   }
 }
