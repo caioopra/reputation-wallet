@@ -8,8 +8,7 @@ interface HeaderProps {
 }
 
 const Header = ({ userView, setUserView }: HeaderProps) => {
-    const userName =
-        userView === "freelancer" ? "Alice" : "Innovate Corp";
+    const userName = userView === "freelancer" ? "Alice" : "Innovate Corp";
 
     return (
         <header className="relative w-full bg-reputation-gray-800 border-b border-reputation-gray-700 shadow-lg animate-slide-up z-10">
@@ -50,7 +49,14 @@ const Header = ({ userView, setUserView }: HeaderProps) => {
                                         checked ? "employer" : "freelancer"
                                     )
                                 }
-                                className="data-[state=checked]:bg-reputation-blue-600 transition-all duration-300 hover:scale-105"
+                                className={`
+                                    bg-reputation-gray-600 
+                                    data-[state=checked]:bg-reputation-blue-500 
+                                    border border-reputation-gray-400 
+                                    transition-all duration-300 hover:scale-105
+
+                                    [&>span]:bg-white
+                                `}
                             />
                             <Label
                                 htmlFor="view-toggle"
