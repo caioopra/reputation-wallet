@@ -12,7 +12,7 @@ const Index = () => {
         <div className="min-h-screen bg-reputation-gray-900 font-inter">
             <Header userView={userView} setUserView={setUserView} />
             <main className="px-4 sm:px-6 lg:px-8 py-8">
-                <div className="transition-all duration-300 ease-in-out">
+                <div className="floating-card transition-all duration-300 ease-in-out">
                     {userView === "freelancer" ? (
                         <div className="animate-slide-up">
                             <FreelancerView />
