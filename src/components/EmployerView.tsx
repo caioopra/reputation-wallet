@@ -190,7 +190,7 @@ const EmployerView = () => {
 
     return (
         <div className="space-y-6 lg:space-y-8">
-            <Card>
+            <Card className="bg-gradient-to-r from-gray-800 to-gray-900 border-reputation-blue-200">
                 <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
                         <div>

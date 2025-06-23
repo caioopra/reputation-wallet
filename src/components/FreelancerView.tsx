@@ -173,7 +173,7 @@ const FreelancerView = () => {
                         Your Reputation Snapshot
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-8">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         <div className="text-center space-y-2">
                             <div className="flex items-center justify-center space-x-1">
@@ -185,7 +185,7 @@ const FreelancerView = () => {
                                     / 5.0
                                 </span>
                             </div>
-                            <p className="text-sm text-reputation-gray-600">
+                            <p className="text-xl text-reputation-gray-700">
                                 Overall Rating
                             </p>
                         </div>
@@ -194,7 +194,7 @@ const FreelancerView = () => {
                             <p className="text-2xl sm:text-3xl font-bold text-reputation-blue-600">
                                 {totalJobs}
                             </p>
-                            <p className="text-sm text-reputation-gray-600">
+                            <p className="text-xl text-reputation-gray-700">
                                 Total Jobs Completed
                             </p>
                         </div>
@@ -203,7 +203,7 @@ const FreelancerView = () => {
                             <p className="text-2xl sm:text-3xl font-bold text-reputation-blue-600">
                                 {mockReviews.length}
                             </p>
-                            <p className="text-sm text-reputation-gray-600">
+                            <p className="text-xl text-reputation-gray-700">
                                 Verifiable Reviews
                             </p>
                         </div>
@@ -255,8 +255,10 @@ const FreelancerView = () => {
                 </CardContent>
             </Card>
 
+            <div className="border-t border-reputation-gray-600 my-6"></div>
+
             {/* My Verifiable Reviews */}
-            <Card>
+            <Card className="bg-gradient-to-r from-gray-900 to-gray-800 border-reputation-blue-200">
                 <CardHeader>
                     <CardTitle className="text-lg sm:text-xl font-bold text-reputation-white-900">
                         My Verifiable Reviews
@@ -296,7 +298,7 @@ const FreelancerView = () => {
                                                 </div>
                                             </div>
 
-                                            <p className="text-reputation-white-700 italic text-sm sm:text-base">
+                                            <p className="text-reputation-white-700 italic text-sm sm:text-base leading-relaxed">
                                                 "{review.reviewSnippet}"
                                             </p>
 

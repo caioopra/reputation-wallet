@@ -34,7 +34,7 @@ const Header = ({ userView, setUserView }: HeaderProps) => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto animate-slide-in-right">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-3">
                             <Label
                                 htmlFor="view-toggle"
                                 className="text-sm font-medium text-reputation-gray-300"
@@ -67,10 +67,10 @@ const Header = ({ userView, setUserView }: HeaderProps) => {
                         </div>
 
                         <div className="text-left sm:text-right">
-                            <p className="text-sm text-reputation-gray-400">
+                            <p className="text-sm text-white font-semibold mb-1">
                                 Welcome back,
                             </p>
-                            <p className="font-semibold text-reputation-gray-100 truncate max-w-[200px]">
+                            <p className="font-bold text-white truncate max-w-[200px]">
                                 {userName}
                             </p>
                         </div>
