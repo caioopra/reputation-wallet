@@ -8,110 +8,69 @@
 
 @layer base {
   :root {
-    --background: 30 0 12;
-    --foreground: 248 250 252;
+    --background: #1e3a8a; /* Changed to a darker blue */
+    --foreground: #ebe5e5;
 
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
+    --card: #1a202e;
+    --card-foreground: #e5e7eb;
 
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
+    --popover: #1a202e;
+    --popover-foreground: #e5e7eb;
 
-    --primary: 59 130 246;
-    --primary-foreground: 248 250 252;
+    --primary: #2563eb;
+    --primary-foreground: #ffffff;
 
-    --secondary: 51 65 85;
-    --secondary-foreground: 203 213 225;
+    --secondary: #1e293b;
+    --secondary-foreground: #94a3b8;
 
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
+    --muted: #1e293b;
+    --muted-foreground: #64748b;
 
-    --accent: 37 99 235;
-    --accent-foreground: 219 234 254;
+    --accent: #1d4ed8;
+    --accent-foreground: #bfdbfe;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
 
-    --border: 71 85 105;
-    --input: 71 85 105;
-    --ring: 59 130 246;
+    --border: #334155;
+    --input: #334155;
+    --ring: #2563eb;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 30 41 59;
-    --sidebar-foreground: 203 213 225;
-    --sidebar-primary: 59 130 246;
-    --sidebar-primary-foreground: 248 250 252;
-    --sidebar-accent: 51 65 85;
-    --sidebar-accent-foreground: 203 213 225;
-    --sidebar-border: 71 85 105;
-    --sidebar-ring: 59 130 246;
+    --sidebar-background: #1a202e;
+    --sidebar-foreground: #94a3b8;
+    --sidebar-primary: #2563eb;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #1e293b;
+    --sidebar-accent-foreground: #94a3b8;
+    --sidebar-border: #334155;
+    --sidebar-ring: #2563eb;
 
     /* Custom dark theme colors - only greys and blues */
-    --reputation-blue-50: 239 246 255;
-    --reputation-blue-100: 219 234 254;
-    --reputation-blue-200: 191 219 254;
-    --reputation-blue-300: 147 197 253;
-    --reputation-blue-400: 96 165 250;
-    --reputation-blue-500: 59 130 246;
-    --reputation-blue-600: 37 99 235;
-    --reputation-blue-700: 29 78 216;
-    --reputation-blue-800: 30 64 175;
-    --reputation-blue-900: 30 58 138;
+    --reputation-blue-50: #eff6ff;
+    --reputation-blue-100: #dbeafe;
+    --reputation-blue-200: #bfdbfe;
+    --reputation-blue-300: #93c5fd;
+    --reputation-blue-400: #60a5fa;
+    --reputation-blue-500: #3b82f6;
+    --reputation-blue-600: #2563eb;
+    --reputation-blue-700: #1d4ed8;
+    --reputation-blue-800: #1e40af;
+    --reputation-blue-900: #1e3a8a;
 
-    --reputation-gray-50: 248 250 252;
-    --reputation-gray-100: 241 245 249;
-    --reputation-gray-200: 226 232 240;
-    --reputation-gray-300: 203 213 225;
-    --reputation-gray-400: 148 163 184;
-    --reputation-gray-500: 100 116 139;
-    --reputation-gray-600: 71 85 105;
-    --reputation-gray-700: 51 65 85;
-    --reputation-gray-800: 30 41 59;
-    --reputation-gray-900: 15 23 42;
+    --reputation-gray-50: #f9fafb;
+    --reputation-gray-100: #f3f4f6;
+    --reputation-gray-200: #e5e7eb;
+    --reputation-gray-300: #d1d5db;
+    --reputation-gray-400: #9ca3af;
+    --reputation-gray-500: #6b7280;
+    --reputation-gray-600: #4b5563;
+    --reputation-gray-700: #374151;
+    --reputation-gray-800: #1f2937;
+    --reputation-gray-900: #0b0f19;
   }
 
-  .dark {
-    --background: 15 23 42;
-    --foreground: 248 250 252;
-
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
-
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
-
-    --primary: 59 130 246;
-    --primary-foreground: 248 250 252;
-
-    --secondary: 51 65 85;
-    --secondary-foreground: 203 213 225;
-
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
-
-    --accent: 37 99 235;
-    --accent-foreground: 219 234 254;
-
-    --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
-
-    --border: 71 85 105;
-    --input: 71 85 105;
-    --ring: 59 130 246;
-
-    --sidebar-background: 30 41 59;
-    --sidebar-foreground: 203 213 225;
-    --sidebar-primary: 59 130 246;
-    --sidebar-primary-foreground: 248 250 252;
-    --sidebar-accent: 51 65 85;
-    --sidebar-accent-foreground: 203 213 225;
-    --sidebar-border: 71 85 105;
-    --sidebar-ring: 59 130 246;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
