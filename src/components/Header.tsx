@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ userView, setUserView }: HeaderProps) => {
     const userName =
-        userView === "freelancer" ? "Ana Carolina" : "Innovate Corp";
+        userView === "freelancer" ? "Alice" : "Innovate Corp";
 
     return (
         <header className="relative w-full bg-reputation-gray-800 border-b border-reputation-gray-700 shadow-lg animate-slide-up z-10">

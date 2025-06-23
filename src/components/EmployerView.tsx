@@ -17,7 +17,7 @@ import { QrCode } from "lucide-react";
 const mockCollaborations = [
     {
         id: 1,
-        freelancerName: "Ana Carolina",
+        freelancerName: "Alice",
         jobTitle: "UX/UI Design for Mobile App",
         status: "review_pending" as const,
     },
@@ -157,10 +157,10 @@ const EmployerView = () => {
     const handleQrScan = () => {
         if (!qrJobTitle.trim()) return;
 
-        // Mock QR scan - automatically identifies Ana Carolina
+        // Mock QR scan - automatically identifies Alice
         const mockFreelancer = {
             id: Date.now(),
-            freelancerName: "Ana Carolina",
+            freelancerName: "Alice",
             jobTitle: qrJobTitle,
             status: "review_pending" as const,
         };
@@ -173,7 +173,7 @@ const EmployerView = () => {
         toast({
             title: "Freelancer identified!",
             description:
-                "Ana Carolina has been identified. You can now write a review.",
+                "Alice has been identified. You can now write a review.",
         });
     };
 

@@ -258,7 +258,7 @@ const FreelancerView = () => {
             {/* My Verifiable Reviews */}
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl font-bold text-reputation-gray-900">
+                    <CardTitle className="text-lg sm:text-xl font-bold text-reputation-white-900">
                         My Verifiable Reviews
                     </CardTitle>
                 </CardHeader>
@@ -275,7 +275,7 @@ const FreelancerView = () => {
                                             <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                                                 <div className="flex items-center space-x-2">
                                                     <UserIcon />
-                                                    <span className="font-semibold text-reputation-gray-900">
+                                                    <span className="font-semibold text-reputation-white-900">
                                                         {review.employerName}
                                                     </span>
                                                 </div>
@@ -285,10 +285,10 @@ const FreelancerView = () => {
                                             </div>
 
                                             <div>
-                                                <h3 className="font-medium text-reputation-gray-900 mb-1">
+                                                <h3 className="font-medium text-reputation-white-900 mb-1">
                                                     {review.jobTitle}
                                                 </h3>
-                                                <div className="flex items-center space-x-2 text-sm text-reputation-gray-600">
+                                                <div className="flex items-center space-x-2 text-sm text-reputation-white-600">
                                                     <CalendarIcon />
                                                     <span>
                                                         {review.dateIssued}
@@ -296,7 +296,7 @@ const FreelancerView = () => {
                                                 </div>
                                             </div>
 
-                                            <p className="text-reputation-gray-700 italic text-sm sm:text-base">
+                                            <p className="text-reputation-white-700 italic text-sm sm:text-base">
                                                 "{review.reviewSnippet}"
                                             </p>
 
@@ -305,7 +305,7 @@ const FreelancerView = () => {
                                                     <Badge
                                                         key={skill}
                                                         variant="secondary"
-                                                        className="text-xs"
+                                                        className="bg-blue-100 text-blue-800 text-xs"
                                                     >
                                                         {skill}
                                                     </Badge>
@@ -324,7 +324,7 @@ const FreelancerView = () => {
                                                                 review
                                                             )
                                                         }
-                                                        className="w-full lg:w-auto transition-colors duration-200"
+                                                        className="w-full lg:w-auto transition-colors duration-200 text-base sm:text-lg px-4 py-2"
                                                     >
                                                         View Credential
                                                     </Button>
@@ -343,7 +343,7 @@ const FreelancerView = () => {
                                                                     <Badge className="bg-green-100 text-green-800 w-fit">
                                                                         Verified
                                                                     </Badge>
-                                                                    <span className="text-sm text-reputation-gray-600">
+                                                                    <span className="text-sm text-reputation-white-600">
                                                                         Credential
                                                                         #
                                                                         {selectedReview.id
