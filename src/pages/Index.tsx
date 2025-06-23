@@ -9,16 +9,16 @@ const Index = () => {
     );
 
     return (
-        <div className="min-h-screen bg-reputation-gray-50 font-inter">
+        <div className="min-h-screen bg-reputation-gray-900 font-inter">
             <Header userView={userView} setUserView={setUserView} />
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <main className="px-4 sm:px-6 lg:px-8 py-8">
                 <div className="transition-all duration-300 ease-in-out">
                     {userView === "freelancer" ? (
-                        <div className="animate-fade-in">
+                        <div className="animate-slide-up">
                             <FreelancerView />
                         </div>
                     ) : (
-                        <div className="animate-fade-in">
+                        <div className="animate-slide-up">
                             <EmployerView />
                         </div>
                     )}

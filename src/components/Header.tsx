@@ -12,8 +12,8 @@ const Header = ({ userView, setUserView }: HeaderProps) => {
         userView === "freelancer" ? "Ana Carolina" : "Innovate Corp";
 
     return (
-        <header className="bg-reputation-gray-800 border-b border-reputation-gray-700 shadow-lg animate-slide-up">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <header className="relative w-full bg-reputation-gray-800 border-b border-reputation-gray-700 shadow-lg animate-slide-up z-10">
+            <div className="px-4 sm:px-6 lg:px-8 py-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
                     <div className="flex items-center space-x-4 animate-slide-in-right">
                         <div className="flex items-center space-x-2">
