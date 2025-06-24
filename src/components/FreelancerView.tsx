@@ -19,7 +19,7 @@ const initialMockReviews = [
         dateIssued: "May 20, 2024",
         rating: 5,
         reviewSnippet:
-            "Ana was exceptional. Her designs were creative and delivered ahead of schedule.",
+            "Alice was exceptional. Her designs were creative and delivered ahead of schedule.",
         skills: ["UI Design", "Figma", "Prototyping", "Communication"],
     },
     {
@@ -108,7 +108,7 @@ const FreelancerView = () => {
     const totalJobs = 32 + (mockReviews.length - initialMockReviews.length);
 
     const handleShareProfile = () => {
-        navigator.clipboard.writeText("https://trustfolio.dev/p/anacarolina");
+        navigator.clipboard.writeText("https://trustfolio.dev/p/alice");
         toast({
             title: "Link copied!",
             description:
@@ -233,7 +233,7 @@ const FreelancerView = () => {
                                     </p>
                                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 p-3 bg-reputation-gray-50 rounded-lg">
                                         <code className="flex-1 text-sm break-all">
-                                            https://trustfolio.dev/p/anacarolina
+                                            https://trustfolio.dev/p/alice
                                         </code>
                                         <Button
                                             size="sm"
