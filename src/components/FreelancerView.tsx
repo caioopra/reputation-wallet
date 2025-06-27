@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,102 +10,22 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-
-const initialMockReviews = [
-    {
-        id: 1,
-        employerName: "HashMasters",
-        jobTitle: "UX/UI Design for Mobile App",
-        dateIssued: "May 20, 2024",
-        rating: 5,
-        reviewSnippet:
-            "Alice was exceptional. Her designs were creative and delivered ahead of schedule.",
-        skills: ["UI Design", "Figma", "Prototyping", "Communication"],
-    },
-    {
-        id: 2,
-        employerName: "NextGen Solutions",
-        jobTitle: "Brand Identity Development",
-        dateIssued: "April 15, 2024",
-        rating: 5,
-        reviewSnippet:
-            "Outstanding work on our brand redesign. Professional and highly creative.",
-        skills: ["Brand Design", "Adobe Illustrator", "Creative Strategy"],
-    },
-    {
-        id: 3,
-        employerName: "TechFlow Inc",
-        jobTitle: "Website Redesign",
-        dateIssued: "March 10, 2024",
-        rating: 4,
-        reviewSnippet:
-            "Great attention to detail and user experience. Delivered quality work on time.",
-        skills: ["Web Design", "Responsive Design", "User Research"],
-    },
-    {
-        id: 4,
-        employerName: "StartupX",
-        jobTitle: "Logo and Marketing Materials",
-        dateIssued: "February 22, 2024",
-        rating: 5,
-        reviewSnippet:
-            "Amazing creativity and professional communication throughout the project.",
-        skills: ["Logo Design", "Print Design", "Adobe Creative Suite"],
-    },
-    {
-        id: 5,
-        employerName: "Global Dynamics",
-        jobTitle: "App Interface Design",
-        dateIssued: "January 18, 2024",
-        rating: 5,
-        reviewSnippet:
-            "Exceeded expectations with innovative design solutions and timely delivery.",
-        skills: ["Mobile UI", "Design Systems", "User Testing"],
-    },
-];
+import { useReviews } from "@/contexts/ReviewsContext";
 
 const FreelancerView = () => {
+    const { reviews } = useReviews();
     const [selectedReview, setSelectedReview] = useState<
-        (typeof initialMockReviews)[0] | null
+        (typeof reviews)[0] | null
     >(null);
-    const [mockReviews, setMockReviews] = useState(initialMockReviews);
     const { toast } = useToast();
 
-    useEffect(() => {
-        const handleNewReview = (event: CustomEvent) => {
-            const { employerName, jobTitle, rating, review, skills } =
-                event.detail;
-
-            const newReview = {
-                id: Date.now(),
-                employerName,
-                jobTitle,
-                dateIssued: new Date().toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                }),
-                rating,
-                reviewSnippet:
-                    review || "Great work and professional collaboration.",
-                skills: skills || [],
-            };
-
-            setMockReviews((prev) => [newReview, ...prev]);
-        };
-
-        window.addEventListener("newReview", handleNewReview as EventListener);
-        return () =>
-            window.removeEventListener(
-                "newReview",
-                handleNewReview as EventListener
-            );
-    }, []);
-
+    // Dynamically calculate average rating and total jobs
     const averageRating =
-        mockReviews.reduce((sum, review) => sum + review.rating, 0) /
-        mockReviews.length;
-    const totalJobs = 32 + (mockReviews.length - initialMockReviews.length);
+        reviews.length > 0
+            ? reviews.reduce((sum, review) => sum + review.rating, 0) /
+              reviews.length
+            : 0;
+    const totalJobs = 32 + Math.max(0, reviews.length - 5); // Assuming 5 initial reviews, 32 base jobs
 
     const handleShareProfile = () => {
         navigator.clipboard.writeText("https://trustfolio.dev/p/alice");
@@ -201,7 +121,7 @@ const FreelancerView = () => {
 
                         <div className="text-center space-y-2">
                             <p className="text-2xl sm:text-3xl font-bold text-reputation-blue-600">
-                                {mockReviews.length}
+                                {reviews.length}
                             </p>
                             <p className="text-xl text-reputation-gray-700">
                                 Verifiable Reviews
@@ -220,31 +140,31 @@ const FreelancerView = () => {
                                     Share My Profile
                                 </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-md sm:max-w-lg">
+                            <DialogContent className="max-w-md sm:max-w-lg bg-gray-900 border border-white text-white rounded-lg">
                                 <DialogHeader>
-                                    <DialogTitle>
+                                    <DialogTitle className="text-white">
                                         Share Your Reputation Profile
                                     </DialogTitle>
                                 </DialogHeader>
                                 <div className="space-y-4">
-                                    <p className="text-reputation-gray-600">
+                                    <p className="text-white">
                                         Your shareable reputation profile link
                                         is:
                                     </p>
-                                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 p-3 bg-reputation-gray-50 rounded-lg">
-                                        <code className="flex-1 text-sm break-all">
+                                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 p-3 bg-gray-800 rounded-lg border border-white">
+                                        <code className="flex-1 text-sm break-all text-white">
                                             https://trustfolio.dev/p/alice
                                         </code>
                                         <Button
                                             size="sm"
                                             onClick={handleShareProfile}
-                                            className="transition-colors duration-200"
+                                            className="transition-colors duration-200 bg-white text-gray-900 hover:bg-gray-300"
                                         >
                                             <CopyIcon />
                                             Copy
                                         </Button>
                                     </div>
-                                    <p className="text-sm text-reputation-gray-500">
+                                    <p className="text-sm text-gray-300">
                                         Share this link with potential clients
                                         to showcase your verified work history.
                                     </p>
@@ -266,7 +186,7 @@ const FreelancerView = () => {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        {mockReviews.map((review) => (
+                        {reviews.map((review) => (
                             <Card
                                 key={review.id}
                                 className="border-reputation-gray-200 hover:shadow-md transition-shadow duration-200"

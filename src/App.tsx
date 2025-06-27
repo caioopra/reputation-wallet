@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./App.css";
@@ -10,21 +11,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { ReviewsProvider } from "./contexts/ReviewsContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
     <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-            <Toaster />
-            <Sonner />
+            <ReviewsProvider>
+                <Toaster />
+                <Sonner />
 
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
-            </BrowserRouter>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Index />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </BrowserRouter>
+            </ReviewsProvider>
         </TooltipProvider>
     </QueryClientProvider>
 );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,33 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { QrCode } from "lucide-react";
-
-const mockCollaborations = [
-    {
-        id: 1,
-        freelancerName: "Alice",
-        jobTitle: "UX/UI Design for Mobile App",
-        status: "review_pending" as const,
-    },
-    {
-        id: 2,
-        freelancerName: "Marcus Johnson",
-        jobTitle: "Frontend Development",
-        status: "review_issued" as const,
-    },
-    {
-        id: 3,
-        freelancerName: "Sarah Chen",
-        jobTitle: "Content Strategy & Writing",
-        status: "review_issued" as const,
-    },
-    {
-        id: 4,
-        freelancerName: "David Rodriguez",
-        jobTitle: "Backend API Development",
-        status: "review_pending" as const,
-    },
-];
+import { useReviews } from "@/contexts/ReviewsContext";
 
 const predefinedSkills = [
     "UI Design",
@@ -53,9 +27,15 @@ const predefinedSkills = [
 ];
 
 const EmployerView = () => {
-    const [collaborations, setCollaborations] = useState(mockCollaborations);
+    const {
+        collaborations,
+        reviews,
+        addReview,
+        updateCollaborationStatus,
+        revokeReview,
+    } = useReviews();
     const [selectedCollaboration, setSelectedCollaboration] = useState<
-        (typeof mockCollaborations)[0] | null
+        (typeof collaborations)[0] | null
     >(null);
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
@@ -64,6 +44,13 @@ const EmployerView = () => {
     const [isQrDialogOpen, setIsQrDialogOpen] = useState(false);
     const [qrJobTitle, setQrJobTitle] = useState("");
     const { toast } = useToast();
+    const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+    const [reviewToRevoke, setReviewToRevoke] = useState<number | null>(null);
+
+    // Filter reviews issued by this employer (HashMasters)
+    const myIssuedReviews = reviews.filter(
+        (review) => review.employerName === "HashMasters"
+    );
 
     const StarIcon = ({
         filled,
@@ -121,37 +108,29 @@ const EmployerView = () => {
     const handleSubmitReview = () => {
         if (!selectedCollaboration || rating === 0) return;
 
-        setCollaborations((prev) =>
-            prev.map((collab) =>
-                collab.id === selectedCollaboration.id
-                    ? { ...collab, status: "review_issued" as const }
-                    : collab
-            )
-        );
+        addReview({
+            employerName: "HashMasters",
+            jobTitle: selectedCollaboration.jobTitle,
+            rating: rating,
+            review: review,
+            skills: selectedSkills,
+            freelancerName: selectedCollaboration.freelancerName,
+        });
 
+        // Update collaboration status
+        updateCollaborationStatus(selectedCollaboration.id, "review_issued");
+
+        // Reset form
         setRating(0);
         setReview("");
         setSelectedSkills([]);
         setIsDialogOpen(false);
 
         toast({
-            title: "Credential successfully issued!",
-            description: `Verifiable credential sent to ${selectedCollaboration.freelancerName}'s Wallet.`,
+            title: "Review submitted successfully!",
+            description: `Verifiable credential sent to ${selectedCollaboration.freelancerName}'s profile.`,
+            className: "bg-white text-black border border-gray-300 shadow-lg",
         });
-
-        // Trigger window event to update freelancer data
-        window.dispatchEvent(
-            new CustomEvent("newReview", {
-                detail: {
-                    employerName: "HashMasters",
-                    jobTitle: selectedCollaboration.jobTitle,
-                    rating: rating,
-                    review: review,
-                    skills: selectedSkills,
-                    freelancerName: selectedCollaboration.freelancerName,
-                },
-            })
-        );
     };
 
     const handleQrScan = () => {
@@ -187,6 +166,39 @@ const EmployerView = () => {
             />
         ));
     };
+
+    // const processedCollaborationsRef = useRef<Set<number>>(new Set());
+
+    // useEffect(() => {
+    //     const unprocessed = collaborations.filter(
+    //         (collab) =>
+    //             collab.status === "review_issued" &&
+    //             !processedCollaborationsRef.current.has(collab.id)
+    //     );
+    
+    //     unprocessed.forEach((collab) => {
+    //         const alreadyExists = reviews.some(
+    //             (review) =>
+    //                 review.jobTitle === collab.jobTitle &&
+    //                 review.freelancerName === collab.freelancerName
+    //         );
+    
+    //         if (!alreadyExists) {
+    //             addReview({
+    //                 employerName: "HashMasters",
+    //                 freelancerName: collab.freelancerName,
+    //                 jobTitle: collab.jobTitle,
+    //                 rating: 5,
+    //                 review:
+    //                     "Excellent work delivered on time and with great professionalism.",
+    //                 skills: ["Professionalism", "Time Management"],
+    //             });
+    
+    //             // Mark as processed in the ref — no re-render
+    //             processedCollaborationsRef.current.add(collab.id);
+    //         }
+    //     });
+    // }, [collaborations, reviews, addReview]);
 
     return (
         <div className="space-y-6 lg:space-y-8">
@@ -246,6 +258,15 @@ const EmployerView = () => {
                                                 setQrJobTitle(e.target.value)
                                             }
                                             className="text-white"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="block text-sm font-medium text-white">
+                                            Freelancer URL (Optional)
+                                        </label>
+                                        <Input
+                                            placeholder="https://trustfolio.dev/p/freelancer-id"
+                                            className="text-white italic"
                                         />
                                     </div>
                                     <div className="flex space-x-3">
@@ -477,6 +498,142 @@ const EmployerView = () => {
                     </div>
                 </CardContent>
             </Card>
+
+            {myIssuedReviews.length > 0 && (
+                <Card className="bg-gradient-to-br from-reputation-blue-50 to-white border-reputation-blue-200">
+                    <CardHeader>
+                        <CardTitle className="text-lg sm:text-xl font-bold text-reputation-gray-900">
+                            Reviews I've Issued ({myIssuedReviews.length})
+                        </CardTitle>
+                        <p className="text-reputation-gray-600">
+                            Verifiable credentials you've issued to freelancers
+                        </p>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="space-y-4">
+                            {myIssuedReviews.map((review) => (
+                                <Card
+                                    key={review.id}
+                                    className="border-reputation-gray-200 hover:shadow-md transition-shadow duration-200"
+                                >
+                                    <CardContent className="p-4 sm:p-6">
+                                        <div className="space-y-3">
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
+                                                <div>
+                                                    <h3 className="font-medium text-reputation-gray-900">
+                                                        {review.jobTitle}
+                                                    </h3>
+                                                    <p className="text-sm text-reputation-gray-600">
+                                                        Issued to{" "}
+                                                        {review.freelancerName}{" "}
+                                                        on {review.dateIssued}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center space-x-1">
+                                                    {renderStars(review.rating)}
+                                                    <span className="ml-1 text-sm font-medium">
+                                                        {review.rating}/5
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <p className="text-reputation-gray-700 italic text-sm">
+                                                "{review.reviewSnippet}"
+                                            </p>
+
+                                            <div className="flex flex-wrap gap-2">
+                                                {review.skills.map((skill) => (
+                                                    <Badge
+                                                        key={skill}
+                                                        variant="secondary"
+                                                        className="bg-blue-100 text-blue-800 text-xs"
+                                                    >
+                                                        {skill}
+                                                    </Badge>
+                                                ))}
+                                            </div>
+
+                                            <div className="flex justify-end">
+                                                <Button
+                                                    variant="destructive"
+                                                    onClick={() => {
+                                                        setReviewToRevoke(
+                                                            review.id
+                                                        );
+                                                        setIsConfirmDialogOpen(
+                                                            true
+                                                        );
+                                                    }}
+                                                    className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200"
+                                                >
+                                                    Revoke Review
+                                                </Button>
+                                            </div>
+                                            <Dialog
+                                                open={isConfirmDialogOpen}
+                                                onOpenChange={
+                                                    setIsConfirmDialogOpen
+                                                }
+                                            >
+                                                <DialogContent className="max-w-md bg-gray-900 border border-white text-white rounded-lg">
+                                                    <DialogHeader>
+                                                        <DialogTitle className="text-white">
+                                                            Confirm Review
+                                                            Revocation
+                                                        </DialogTitle>
+                                                    </DialogHeader>
+                                                    <div className="space-y-4">
+                                                        <p className="text-white">
+                                                            Are you sure you
+                                                            want to revoke this
+                                                            review? This action
+                                                            cannot be undone.
+                                                        </p>
+                                                        <div className="flex justify-end space-x-3">
+                                                            <Button
+                                                                variant="outline"
+                                                                onClick={() =>
+                                                                    setIsConfirmDialogOpen(
+                                                                        false
+                                                                    )
+                                                                }
+                                                                className="text-white border-white hover:bg-gray-700 transition-colors duration-200"
+                                                            >
+                                                                Cancel
+                                                            </Button>
+                                                            <Button
+                                                                onClick={() => {
+                                                                    if (
+                                                                        reviewToRevoke !==
+                                                                        null
+                                                                    ) {
+                                                                        revokeReview(
+                                                                            reviewToRevoke
+                                                                        );
+                                                                    }
+                                                                    setIsConfirmDialogOpen(
+                                                                        false
+                                                                    );
+                                                                    setReviewToRevoke(
+                                                                        null
+                                                                    );
+                                                                }}
+                                                                className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200"
+                                                            >
+                                                                Confirm
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </CardContent>
+                </Card>
+            )}
 
             <Card className="bg-gradient-to-br from-reputation-blue-50 to-white border-reputation-blue-200">
                 <CardContent className="p-4 sm:p-6">
